@@ -1,6 +1,6 @@
 <template>
   <svg viewBox="0 0 710 200" fill="#1f1f1f" class="logo">
-    <g class="leftblink" v-if="leftBlink">
+    <g class="leftblink" v-if="blink">
       <rect
         x="105"
         y="84"
@@ -14,7 +14,7 @@
         d="M136.22,91.78c-6.31-5.28-14.92-8.19-24.24-8.19s-17.88,2.89-24.19,8.14c-6.47,5.38-10.03,12.91-10.03,21.2s3.57,15.8,10.05,21.17c6.31,5.23,14.89,8.1,24.16,8.1,19.5,0,34.21-12.58,34.21-29.27,0-8.25-3.54-15.76-9.97-21.15ZM132.56,112.93c0,10.04-8.82,17.6-20.51,17.6s-20.73-7.57-20.73-17.6,8.91-17.68,20.73-17.68,20.51,7.6,20.51,17.68Z"
       />
     </g>
-    <g class="rightblink" v-if="rightBlink">
+    <g class="rightblink" v-if="blink">
       <rect
         x="260"
         y="84"
@@ -64,41 +64,30 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from "vue";
 
-const leftBlink = ref(false);
-const rightBlink = ref(false);
-const leftBlinkInterval = ref(null);
-const rightBlinkInterval = ref(null);
-const leftBlinkTimeout = ref(null);
-const rightBlinkTimeout = ref(null);
-const BLINK_INTERVAL = 5000;
-const BLINK_DURATION = 200;
-const RIGHT_BLINK_DELAY = BLINK_INTERVAL/2;
+const blink = ref(false);
+const blinkInterval = ref(null);
+const blinkTimeOut = ref(null);
+const BLINK_INTERVAL = 12000;
+const BLINK_DURATION = 150;
+
+const triggerBlink = () => {
+  blink.value = true;
+  blinkTimeOut.value = setTimeout(() => {
+    blink.value = false;
+  }, BLINK_DURATION);
+};
 
 onMounted(() => {
-  leftBlinkInterval.value = setInterval(() => {
-    leftBlink.value = true;
-
-    leftBlinkTimeout.value = setTimeout(() => {
-      leftBlink.value = false;
-    }, BLINK_DURATION);
-
-  }, BLINK_INTERVAL);
-
-  rightBlinkTimeout.value = setTimeout(() => {
-    rightBlinkInterval.value = setInterval(() => {
-      rightBlink.value = true;
-
-      rightBlinkTimeout.value = setTimeout(() => {
-        rightBlink.value = false;
-      }, BLINK_DURATION);
+  setTimeout(() => {
+    triggerBlink();
+    blinkInterval.value = setInterval(() => {
+      triggerBlink();
     }, BLINK_INTERVAL);
-  }, RIGHT_BLINK_DELAY);
+  }, 6000);
 });
 
 onBeforeUnmount(() => {
-  if (leftBlinkInterval.value) clearInterval(leftBlinkInterval.value);
-  if (rightBlinkInterval.value) clearInterval(rightBlinkInterval.value);
-  if (leftBlinkTimeout.value) clearTimeout(leftBlinkTimeout.value);
-  if (rightBlinkTimeout.value) clearTimeout(rightBlinkTimeout.value);
+  if (blinkInterval.value) clearInterval(blinkInterval.value);
+  if (blinkTimeOut.value) clearTimeout(blinkTimeOut.value);
 });
 </script>
