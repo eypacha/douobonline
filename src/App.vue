@@ -18,7 +18,7 @@
           </svg>
         </a>
         <a
-          href="https://instagra.com/verne.studio.ar"
+          href="https://instagram.com/verne.studio.ar"
           target="_blank"
           alt="Instagram"
         >
