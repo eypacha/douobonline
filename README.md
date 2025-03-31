@@ -1,5 +1,41 @@
-# Vue 3 + Vite
+# douob.online
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+This is the official website for douob, a system made by [verne.studio](https://verne.studio) that allows us to connect and take control of the screens that surround us, shop windows, events, cinemas, exhibitions, museums and public roads.
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+## About douob
+
+douob is an interactive system designed to manage digital displays across various environments:
+- Shop windows
+- Events
+- Cinemas
+- Exhibitions
+- Museums
+- Public roads
+
+## Configuration
+
+- **Base URL**: https://douob.online
+
+## Technical Information
+
+This project is built with:
+- Vite as build tool
+- Tailwind CSS for styling
+
+## Development
+
+```bash
+# Install dependencies
+yarn
+
+# Start development server
+yarn dev
+
+# Build for production
+yarn build
+
+# Preview production build
+yarn preview
+```
+
+For more information, contact [verne.studio](https://verne.studio).
